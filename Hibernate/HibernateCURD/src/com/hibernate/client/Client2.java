@@ -1,0 +1,50 @@
+package com.hibernate.client;
+
+import java.util.Scanner;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import com.hibernate.model.*;
+import com.hibernate.util.*;
+
+public class Client2 {
+	
+	public static void main(String[] args) {
+		SessionFactory factory = null;
+		Session session = null;
+		Transaction txn=null;
+		try {
+			 factory=HibernateUtil.obtainSessionFactory();
+			 session = factory.getCurrentSession();
+			 txn = session.beginTransaction();	//mandatory	
+			
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Enter Employee Id to be searched=");
+			int eid=sc.nextInt();
+			
+			/*
+			 * load method throws Exception if record not found
+			 * get method returns null if record not found
+			 */
+			Employee emp=(Employee) session.get(Employee.class, eid);
+			if(emp!=null){
+					System.out.println("Employee Id="+emp.getEmpId());
+					System.out.println("Employee Name="+emp.getEmpName());
+					System.out.println("Employee Salary="+emp.getEmpSal());
+					System.out.println("Joining Date="+emp.getJoiningDate());
+			}
+			else {
+				System.out.println("Record Not FOund!!");
+			}
+			sc.close();			
+			
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		}
+		finally{
+			txn.commit();
+		}
+	}
+}

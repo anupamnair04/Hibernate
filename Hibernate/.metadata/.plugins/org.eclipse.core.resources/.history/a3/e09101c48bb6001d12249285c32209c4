@@ -1,0 +1,30 @@
+package com.hibernate.client;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import com.hibernate.model.*;
+
+import com.hibernate.util.HibernateUtil;
+
+public class Client2 {
+	public static void main(String[] args) {
+		SessionFactory factory = HibernateUtil.obtainSessionFactory();
+
+		Session session = factory.getCurrentSession();
+		Transaction txn = session.beginTransaction();
+		Movie m=(Movie) session.get(Movie.class,103);
+		if(m!=null){
+			System.out.println("Movie Name= "+m.getMovieName());
+			for(Actor a:m.getActors())
+			{
+				System.out.println("Actor Name="+a.getActorName());
+			}
+		}
+		else
+			System.out.println("Movie Not FOund!!");
+		
+		txn.commit();
+	}
+
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;com.hibernate.client.Client_Form.java&apos; to &apos;Client_From.java&apos;&#x0D;&#x0A;- Original project: &apos;HibernateQueryLanguage&apos;&#x0D;&#x0A;- Original element: &apos;com.hibernate.client.Client_Form.java&apos;&#x0D;&#x0A;- Renamed element: &apos;com.hibernate.client.Client_From.java&apos;" description="Rename compilation unit &apos;Client_Form.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;com.hibernate.client{Client_Form.java" name="Client_From.java" references="false" stamp="1677319469961" version="1.0"/>
+</session>

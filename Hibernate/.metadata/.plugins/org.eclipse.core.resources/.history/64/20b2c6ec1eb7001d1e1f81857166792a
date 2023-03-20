@@ -1,0 +1,29 @@
+package com.hibernate.model;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+	@Entity
+	@Table(name="hib_customerAssociation")
+	public class Customer {
+		
+	@Id	
+	@Column(name="custid")
+	private Long customerId;
+	
+	@Column(name="custname",length=15)
+	private String customername;
+	
+	@Column(name="cellphone",length=20)
+	private String cellphone;
+	
+	@Column(name="custaddress",length=35)
+	private String customeraddress;
+
+	@OneToOne(mappedBy="customer", cascade=CascadeType.ALL)
+	private PassportDetails passportDetail;
+}

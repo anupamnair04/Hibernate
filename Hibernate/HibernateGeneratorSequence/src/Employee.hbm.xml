@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hibernate.model">
+<class name="Employee" table="hibEmployee">
+	<id name="empId" column="eid">
+	
+	<!-- <generator class = "assigned"></generator> -->
+	<generator class = "increment"></generator>
+	
+	<!-- <generator class = "sequence">
+	<param name = "sequence">mysequence</param>
+	<param name = "parameters">START WITH 1 INCREMENT BY 2</param>
+	</generator> -->
+	
+	</id>
+	<property name="empName">
+		<column name="ename" length="20"></column>
+	</property>
+	<!-- If column is not mentioned it will consider property name -->
+	<property name="empSal">		
+	</property>
+	<property name="joiningDate">
+		<column name="jdate"></column>
+	</property>
+</class>
+</hibernate-mapping>

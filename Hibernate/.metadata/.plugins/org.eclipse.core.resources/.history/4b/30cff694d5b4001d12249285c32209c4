@@ -1,0 +1,76 @@
+package com.hibernate.model;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="hib_product")
+public class Product {
+	@Id
+	@Column(name="pid")
+	private int pId; 
+		
+	@Column(name="pname",length=20)
+	private String pName;
+		
+	@Column
+	private double pPrice;
+		
+	@Embedded
+		private Manufacture resManufacture;
+		
+		public Product() {
+			super();
+		}
+		
+		public Product(int pId, String pName, double pPrice, Manufacture resManufacture){
+			super();
+			this.pId = pId;
+			this.pName = pName;
+			this.pPrice = pPrice;
+			this.resManufacture = resManufacture;
+		}
+
+		public int getpId() {
+			return pId;
+		}
+
+		public void setpId(int pId) {
+			this.pId = pId;
+		}
+
+		public String getpName() {
+			return pName;
+		}
+
+		public void setpName(String pName) {
+			this.pName = pName;
+		}
+
+		public double getpPrice() {
+			return pPrice;
+		}
+
+		public void setpPrice(double pPrice) {
+			this.pPrice = pPrice;
+		}
+
+		public Manufacture getResManufacture() {
+			return resManufacture;
+		}
+
+		public void setResManufacture(Manufacture resManufacture) {
+			this.resManufacture = resManufacture;
+		}
+
+		@Override
+		public String toString() {
+			return "Product [pId=" + pId + ", pName=" + pName + ", pPrice=" + pPrice + ", resManufacture="
+					+ resManufacture + "]";
+		}
+}

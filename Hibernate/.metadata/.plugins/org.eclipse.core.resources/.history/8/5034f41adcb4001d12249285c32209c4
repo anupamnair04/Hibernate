@@ -1,0 +1,64 @@
+package com.hibernate.model;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+//import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
+	
+@Entity
+//@MappedSuperclass
+@Table(name="Hibin3")
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+
+public class Student {
+	@Id
+	@Column
+	private int rollno;
+	@Column(name="name",length = 20)
+	private String name;
+	@Column(name="adate")
+	private Date addmissionDate;
+	@Embedded
+	private Address perAddress;
+		
+	public Student() {
+		super();
+	}
+	public Student(int rollno, String name, Date addmissionDate, Address perAddress) {
+		super();
+		this.rollno = rollno;
+		this.name = name;
+		this.addmissionDate = addmissionDate;
+		this.perAddress = perAddress;
+	}
+	public int getRollno() {
+		return rollno;
+	}
+	public void setRollno(int rollno) {
+		this.rollno = rollno;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Date getAddmissionDate() {
+		return addmissionDate;
+	}
+	public void setJoiningDate(Date joiningDate) {
+		this.addmissionDate = joiningDate;
+	}
+	public Address getPerAddress() {
+		return perAddress;
+	}
+	public void setPerAddress(Address perAddress) {
+		this.perAddress = perAddress;
+	}			
+}

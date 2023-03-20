@@ -1,0 +1,84 @@
+package com.hibernate.client;
+
+	import java.util.Iterator;
+	import java.util.Set;
+	import org.hibernate.Session;
+	import org.hibernate.SessionFactory;
+	import org.hibernate.Transaction;
+	import com.hibernate.model.Department;
+	import com.hibernate.model.Employee;
+	import com.hibernate.util.HibernateUtil;
+
+	public class HibernateMain {
+		public static void main(String[] args) {
+		
+			SessionFactory factory = HibernateUtil.obtainSessionFactory();
+
+			Session session = factory.getCurrentSession();
+			Transaction txn = session.beginTransaction();
+
+			  //create department object & save it
+			  Department d1 = new Department();
+			  d1.setDepartmentName("Sales");
+			  session.save(d1);
+			  
+			  Department d2 = new Department();
+			  d2.setDepartmentName("Marketing");
+			  session.save(d2);
+			  
+			  //create employee objects & associate it with dept & save them
+			  Employee emp1 = new Employee(129L,"John", "Joy", "567");
+			  Employee emp2 = new Employee(234L,"Sam", "Almy", "23456");
+		  
+			  //imp
+			  emp1.setDepartment(d1); 
+			  emp2.setDepartment(d1);
+		  
+			  session.save(emp1); 
+			  session.save(emp2);		  
+			  
+			  Employee emp3 = new Employee(666L,"Robert", "Dex", "567");
+			  Employee emp4 = new Employee(777L,"Sameer", "Al", "23456");
+		  
+			  //imp
+			  emp3.setDepartment(d2); 
+			  emp4.setDepartment(d2);
+		  
+			  session.save(emp3); 
+			  session.save(emp4);
+			
+			 //add an employee in pre-saved department
+			 /* Department dept = (Department) session.get(Department.class, 2L);
+			 Employee emp = new Employee(999L,"Gita", "KL", "4544545");
+			 emp.setDepartment(dept);	  
+			 session.save(emp); 
+			
+			//add a new department
+			Department d3 = new Department();
+			d3.setDepartmentName("Purchase");
+			session.save(d3);*/
+			  
+			//print employee details based on dept id 
+			/*Long deptno = 2L;
+			Department dept = (Department) session.get(Department.class, deptno);
+			if(dept !=null){
+					System.out.println("Dept Name="+dept.getDepartmentName());
+					System.out.println("Employee List");
+					//using for-each loop				
+					for(Employee e:dept.getEmployees()){
+						System.out.println(e.getFirstname()+"   "+e.getLastname());		
+					}				
+					//using iterator
+					Set<Employee> emps=dept.getEmployees();
+					Iterator<Employee> itr=emps.iterator();
+					while(itr.hasNext()){
+						Employee e1=itr.next();
+						System.out.println(e1.getFirstname()+"   "+e1.getLastname());
+					}			
+			}else{
+				System.out.println("Department not found!!");
+			}*/
+			
+			  txn.commit();	
+		}
+}

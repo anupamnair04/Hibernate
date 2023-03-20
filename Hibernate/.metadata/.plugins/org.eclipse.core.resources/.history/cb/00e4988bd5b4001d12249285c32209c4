@@ -1,0 +1,79 @@
+package com.hibernate.model;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="hib_product")
+public class Product {
+	@Id
+	@Column(name="pid")
+	private int pId; 
+		
+	@Column(name="pname",length=20)
+	private String pName;
+		
+	@Column
+	private double pPrice;
+		
+	@Embedded
+		private Manufacture resManufacture;
+		
+		public Product() {
+			super();
+		}
+		
+		public Product(int pId, String pName, double pPrice, Manufacture resManufacture){
+			super();
+			this.pId = pId;
+			this.pName = pName;
+			this.pPrice = pPrice;
+			this.resManufacture = resManufacture;
+		}
+
+		public int getEmpId() {
+			return empId;
+		}
+		public void setEmpId(int empId) {
+			this.empId = empId;
+		}
+		public String getEmpName() {
+			return empName;
+		}
+		public void setEmpName(String empName) {
+			this.empName = empName;
+		}
+		public double getEmpSal() {
+			return empSal;
+		}
+		public void setEmpSal(double empSal) {
+			this.empSal = empSal;
+		}
+		public Date getJoiningDate() {
+			return joiningDate;
+		}
+		public void setJoiningDate(Date joiningDate) {
+			this.joiningDate = joiningDate;
+		}
+
+		public Address getResAddress() {
+			return resAddress;
+		}
+
+		public void setResAddress(Address resAddress) {
+			this.resAddress = resAddress;
+		}
+
+		@Override
+		public String toString() {
+			return "Employee [empId=" + empId + ", empName=" + empName
+					+ ", empSal=" + empSal + ", joiningDate=" + joiningDate
+					+ ", resAddress=" + resAddress + "]";
+		}	
+	}
+}

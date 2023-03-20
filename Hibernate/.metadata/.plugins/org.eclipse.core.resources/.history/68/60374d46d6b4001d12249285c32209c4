@@ -1,0 +1,58 @@
+package com.hibernate.client;
+
+import java.sql.Date;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import com.hibernate.model.Manufacture;
+import com.hibernate.model.Product;
+import com.hibernate.util.HibernateUtil;
+
+public class Product1 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		SessionFactory factory = null;
+		Session session = null;
+		Transaction txn=null;
+		try {
+			factory = HibernateUtil.obtainSessionFactory();
+			session = factory.getCurrentSession();
+			txn = session.beginTransaction(); // mandatory
+
+			// save a new record
+			Product p = new Product();
+			p.setpId(1);
+			p.setpName("Headphone");
+			p.setpPrice(86000);
+			p.setResManufacture(new Manufacture("M G Road","Pune","MH","INDIA",411045));
+			session.save(p);
+
+			Product p1 = new Product();
+			p1.setpId(1024);
+			p1.setpName("Rohan");
+			p1.setpPrice(99000);
+			p1.setResManufacture(new Manufacture("S G Road","Nashik","MH","INDIA",7654334));												// yyyy-MM-dd
+			session.save(p1);
+
+			Product p2 = new Product();
+			p2.setpId(2345);
+			p2.setpName("Shiv");
+			p2.setpPrice(299000);
+			Manufacture addr=new Manufacture("Parihar Chowk", "Pune", "MH", "India", 411021);										// yyyy-MM-dd
+			p2.setResManufacture(addr);
+			session.save(p2);		
+
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		}
+		finally{
+			txn.commit();// mandatory			
+		}
+	}
+}

@@ -1,0 +1,10 @@
+package com.hibernate.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="hib_passportdetail")
+public class PassportDetails {
+
+}

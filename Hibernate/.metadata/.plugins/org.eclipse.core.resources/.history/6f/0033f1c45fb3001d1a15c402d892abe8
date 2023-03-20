@@ -1,0 +1,5 @@
+package com.seed.util;
+
+public class HibernateUtil {
+
+}

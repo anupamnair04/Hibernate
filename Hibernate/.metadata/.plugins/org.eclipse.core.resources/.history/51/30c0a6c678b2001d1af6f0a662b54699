@@ -1,0 +1,5 @@
+package com.hibernate.client;
+
+public class Client3 {
+
+}

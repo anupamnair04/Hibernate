@@ -1,0 +1,63 @@
+package com.seed.client;
+
+
+
+import java.sql.Date;
+import com.seed.model.Address;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import com.seed.model.Employee;
+import com.seed.util.HibernateUtil;
+
+public class Client1 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		SessionFactory factory = null;
+		Session session = null;
+		Transaction txn=null;
+		try {
+			factory = HibernateUtil.obtainSessionFactory();
+			session = factory.getCurrentSession();
+			txn = session.beginTransaction(); // mandatory
+
+			// save a new record
+			Employee emp = new Employee();
+			emp.setEmpId(1039);
+			emp.setEmpName("Rishi");
+			emp.setEmpSal(86000);
+			emp.setJoiningDate(Date.valueOf("2010-08-03")); // format yyyy-MM-dd
+			emp.setResAddress(new Address("M G Road","Pune","MH","INDIA",411045));
+			session.save(emp);
+
+			Employee emp1 = new Employee();
+			emp1.setEmpId(1024);
+			emp1.setEmpName("Rohan");
+			emp1.setEmpSal(99000);
+			emp1.setJoiningDate(Date.valueOf("2014-05-04")); // format
+			emp1.setResAddress(new Address("S G Road","Nashik","MH","INDIA",7654334));												// yyyy-MM-dd
+			session.save(emp1);
+
+			Employee emp2 = new Employee();
+			emp2.setEmpId(2345);
+			emp2.setEmpName("Shiv");
+			emp2.setEmpSal(299000);
+			emp2.setJoiningDate(Date.valueOf("2015-02-04")); // format
+			Address addr=new Address("Parihar Chowk", "Pune", "MH", "India", 411021);										// yyyy-MM-dd
+			emp2.setResAddress(addr);
+			session.save(emp2);		
+
+		} catch (HibernateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			txn.commit();// mandatory			
+		}
+	}
+}

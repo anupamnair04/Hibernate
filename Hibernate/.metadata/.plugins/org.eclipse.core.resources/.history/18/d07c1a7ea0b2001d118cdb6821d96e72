@@ -1,0 +1,52 @@
+package com.hibernate.client;
+
+import java.util.Scanner;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import com.hibernate.util.HibernateUtil;
+import com.hibernate.model.*;
+
+public class Client4 {
+
+	
+	public static void main(String[] args) {
+		Transaction txn=null;
+		try {
+			SessionFactory factory=HibernateUtil.obtainSessionFactory();
+			Session session=factory.getCurrentSession();
+			txn=session.beginTransaction();		
+			
+			Scanner sc=new Scanner(System.in);
+			System.out.println("Enter the Employee Id to be updated=");
+			int eid=sc.nextInt();
+			
+			System.out.println("Enter the new salary=");
+			double amt=sc.nextDouble();
+			
+			Employee emp=(Employee) session.get(Employee.class, eid);
+			if(emp!=null){
+				emp.setEmpSal(amt);
+				session.update(emp);
+				System.out.println("Record Updated!!");
+			}
+			else{
+				System.out.println("Record Not Found!!");
+			}		
+			sc.close();
+		} catch (HibernateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally{
+			txn.commit();
+		}
+		
+		
+
+	}
+
+}
